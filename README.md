@@ -17,6 +17,12 @@ The stack is fully deployed using Kubernetes manifests and ConfigMaps, without H
 
 ---
 
+
+
+![Grafana Dashboard](dashboard-image/Screenshot.png)
+
+--- 
+
 ## 🧱 Components Overview
 
 ### 🔹 Prometheus
@@ -157,28 +163,15 @@ Password: admin
 
 Available metrics in Grafana / Prometheus:
 
-process_cpu_seconds_total
+> process_cpu_seconds_total
 
-node_memory_MemAvailable_bytes
+> node_memory_MemAvailable_bytes
 
-node_cpu_seconds_total
+> node_cpu_seconds_total
 
-container_cpu_usage_seconds_total
-
-
-
----
-
-## 📸 Screenshots
-
-> 📷 Grafana Dashboard Screenshot
-(dashboard-image/Screenshot from 2025-12-28 23-14-35.png)
+> container_cpu_usage_seconds_total
 
 
-
-Example after adding image:
-
-![Grafana Dashboard](screenshots/grafana-dashboard.png)
 
 
 ---
