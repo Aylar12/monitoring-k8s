@@ -1,0 +1,21 @@
+groups:
+- name: basic-alerts
+  rules:
+
+  - alert: InstanceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Instance down"
+      description: "Target {{ $labels.instance }} is down"
+
+  - alert: HighCPUUsage
+    expr: rate(process_cpu_seconds_total[1m]) > 0.8
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage"
+      description: "CPU usage is higher than 80%"

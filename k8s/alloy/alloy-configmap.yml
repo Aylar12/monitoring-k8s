@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alloy-config
+  namespace: monitoring
+data:
+  config.alloy: |
+    logging {
+      level = "info"
+    }
+
+    prometheus.exporter.unix "node" {}
+
+    prometheus.scrape "node" {
+      targets    = prometheus.exporter.unix.node.targets
+      forward_to = [prometheus.remote_write.default.receiver]
+    }
+
+    prometheus.remote_write "default" {
+      endpoint {
+        url = "http://prometheus.monitoring.svc.cluster.local:9090/api/v1/write"
+      }
+    }
+
+    loki.write "k8s_loki" {
+      endpoint {
+        url = "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
+      }
+    }
+
+    local.file_match "k8s_logs" {
+      path_targets = [
+        { "__path__" = "/var/log/containers/*.log" },
+      ]
+    }
+
+    loki.source.file "k8s_logs" {
+      targets    = local.file_match.k8s_logs.targets
+      forward_to = [loki.write.k8s_loki.receiver]
+    }
