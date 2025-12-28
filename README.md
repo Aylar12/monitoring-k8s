@@ -14,32 +14,6 @@ Grafana Alloy – Metrics & logs agent
 The stack is fully deployed using Kubernetes manifests and ConfigMaps, without Helm.
 
 
----
-
-## 📁 Project Structure
-
-monitoring-k8s/
-├── k8s/
-│   ├── namespace.yaml
-│   ├── prometheus/
-│   │   ├── deployment.yaml
-│   │   ├── service.yaml
-│   │   ├── configmap.yaml
-│   │   └── alerts.yml
-│   ├── grafana/
-│   │   ├── deployment.yaml
-│   │   ├── service.yaml
-│   │   ├── configmap-datasources.yaml
-│   │   └── configmap-dashboards.yaml
-│   ├── loki/
-│   │   ├── deployment.yaml
-│   │   ├── service.yaml
-│   │   └── configmap.yaml
-│   └── alloy/
-│       ├── deployment.yaml
-│       └── configmap.yaml
-└── README.md
-
 
 ---
 
@@ -198,13 +172,13 @@ container_cpu_usage_seconds_total
 ## 📸 Screenshots
 
 > 📷 Grafana Dashboard Screenshot
-(Add your dashboard screenshot here)
+(dashboard-image/Screenshot from 2025-12-28 23-14-35.png)
 
 
 
 Example after adding image:
 
-![Grafana Dashboard](dashboard-image/Screenshot from 2025-12-28 23-14-35.png)
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
 
 
 ---
@@ -216,10 +190,10 @@ Alert rules are defined in:
 k8s/prometheus/alerts.yml
 
 Loaded via:
-
+```bash
 rule_files:
   - /etc/prometheus/alerts/*.yml
-
+```
 
 ---
 
