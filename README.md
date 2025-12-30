@@ -124,8 +124,11 @@ kubectl get pods -n monitoring
 Expected output:
 
 alloy        Running
+
 grafana      Running
+
 loki         Running
+
 prometheus   Running
 
 
@@ -138,7 +141,9 @@ Grafana
 kubectl port-forward -n monitoring svc/grafana 3000:3000
 ```
 ➡️ http://localhost:3000
+
 Username: admin
+
 Password: admin
 
 
@@ -238,7 +243,6 @@ CI/CD pipeline
 
 ## 👤 Author
 
-Aylar
-Computer Engineer | DevOps & Monitoring Enthusiast
+Aylar Computer Engineer | DevOps & Monitoring Enthusiast
 
 
