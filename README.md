@@ -17,7 +17,7 @@ This project demonstrates a production-like monitoring setup deployed fully via 
 ---
 
 ## 🧱 Architecture Overview
-
+```text
 Kubernetes Cluster
 │
 ├── Prometheus  ← Metrics & Alerts
@@ -27,7 +27,7 @@ Kubernetes Cluster
 ├── Loki        ← Logs
 │
 └── Alloy       ← Metrics + Logs Agent
-
+```
 
 ---
 
@@ -52,7 +52,7 @@ Kubernetes Cluster
 ---
 
 ## 📁 Project Structure
-
+```text
 monitoring-k8s/
 ├── helm/
 │   └── monitoring/
@@ -74,13 +74,17 @@ monitoring-k8s/
 │           │   ├── grafana-service.yml
 │           │   ├── datasources-provisioning-configmap.yml
 │           │   ├── dashboards-provisioning-configmap.yml
-│           │   └── dashboards-configmap.yml
+│           │   └── configmap-dashboards.yml
 │           └── loki/
 │               ├── loki-deployment.yml
 │               ├── loki-service.yml
 │               └── loki-configmap.yml
+│
+├── dashboard-image
+│    └── Screenshot.png
+│
 └── README.md
-
+```
 
 ---
 
