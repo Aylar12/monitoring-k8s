@@ -1,3 +1,4 @@
+
 # 📊 Kubernetes Monitoring Stack (Helm-based)
 
 A complete Kubernetes Monitoring Stack built using Helm, including:
@@ -16,6 +17,7 @@ This project demonstrates a production-like monitoring setup deployed fully via 
 
 ---
 
+
 ## 🧱 Architecture Overview
 ```text
 Kubernetes Cluster
@@ -30,6 +32,7 @@ Kubernetes Cluster
 ```
 
 ---
+
 
 ## 🚀 Features
 
@@ -50,6 +53,7 @@ Kubernetes Cluster
 
 
 ---
+
 
 ## 📁 Project Structure
 ```text
@@ -88,6 +92,7 @@ monitoring-k8s/
 
 ---
 
+
 ## ⚙️ Prerequisites
 
 Kubernetes cluster (Kind / Minikube / K3s)
@@ -100,6 +105,7 @@ Helm v3+
 
 ---
 
+
 ## 🛠️ Installation
 
 ### 1️⃣ Clone repository
@@ -110,12 +116,14 @@ cd monitoring-k8s
 
 ---
 
+
 ### 2️⃣ Install Helm chart
 ```bash
 helm install monitoring ./helm/monitoring
 ```
 
 ---
+
 
 ### 3️⃣ Verify pods
 ```bash
@@ -134,6 +142,7 @@ prometheus   Running
 
 ---
 
+
 ## 🌐 Access Services
 
 Grafana
@@ -148,6 +157,7 @@ Password: admin
 
 
 ---
+
 
 ## Prometheus
 ```bash
@@ -197,6 +207,7 @@ Alertmanager integration
 
 ---
 
+
 ## 📈 Metrics & Logs
 
 Metrics collected via Prometheus & Alloy
@@ -208,6 +219,7 @@ Visualization via Grafana
 
 
 ---
+
 
 ## 🧠 What This Project Demonstrates
 
@@ -225,6 +237,7 @@ Real-world DevOps skills
 
 ---
 
+
 ## 🔮 Future Improvements
 
 Alertmanager integration
@@ -240,6 +253,7 @@ CI/CD pipeline
 
 
 ---
+
 
 ## 👤 Author
 
