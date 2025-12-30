@@ -15,7 +15,7 @@ data:
           severity: critical
         annotations:
           summary: "Instance down"
-          description: "Target {{ $labels.instance }} is down"
+          description: "Target {{`{{ $labels.instance }}`}} is down"
 
       - alert: HighCPUUsage
         expr: rate(process_cpu_seconds_total[1m]) > 0.8

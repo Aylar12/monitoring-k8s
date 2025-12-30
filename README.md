@@ -1,237 +1,240 @@
-# Kubernetes Monitoring Stack (Prometheus, Grafana, Loki, Alloy)
+# 📊 Kubernetes Monitoring Stack (Helm-based)
 
-This project sets up a complete monitoring stack on Kubernetes using:
+A complete Kubernetes Monitoring Stack built using Helm, including:
 
-Prometheus – Metrics collection
+Prometheus – metrics collection & alerting
 
-Grafana – Visualization & dashboards
+Grafana – visualization & dashboards (auto-provisioned)
 
-Loki – Log aggregation
+Loki – log aggregation
 
-Grafana Alloy – Metrics & logs agent
+Grafana Alloy – metrics & logs agent
 
 
-The stack is fully deployed using Kubernetes manifests and ConfigMaps, without Helm.
+This project demonstrates a production-like monitoring setup deployed fully via Helm charts.
+
+
+---
+
+## 🧱 Architecture Overview
+
+Kubernetes Cluster
+│
+├── Prometheus  ← Metrics & Alerts
+│
+├── Grafana     ← Dashboards (Provisioned)
+│
+├── Loki        ← Logs
+│
+└── Alloy       ← Metrics + Logs Agent
+
+
+---
+
+## 🚀 Features
+
+✅ Helm-based deployment
+
+✅ Auto-provisioned Grafana dashboards
+
+✅ Auto-provisioned Grafana datasources
+
+✅ Prometheus alert rules via ConfigMap
+
+✅ Centralized logs with Loki
+
+✅ Clean Kubernetes-native configuration
+
+✅ Ready for extension (Email alerts, Slack, etc.)
 
 
 
 ---
 
+## 📁 Project Structure
+
+monitoring-k8s/
+├── helm/
+│   └── monitoring/
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       └── templates/
+│           ├── namespace.yml
+│           ├── alloy/
+│           │   ├── alloy-deployment.yml
+│           │   ├── alloy-service.yml
+│           │   └── alloy-configmap.yml
+│           ├── prometheus/
+│           │   ├── prometheus-deployment.yml
+│           │   ├── prometheus-service.yml
+│           │   ├── prometheus-configmap.yml
+│           │   └── configmap-alerts.yml
+│           ├── grafana/
+│           │   ├── grafana-deployment.yml
+│           │   ├── grafana-service.yml
+│           │   ├── datasources-provisioning-configmap.yml
+│           │   ├── dashboards-provisioning-configmap.yml
+│           │   └── dashboards-configmap.yml
+│           └── loki/
+│               ├── loki-deployment.yml
+│               ├── loki-service.yml
+│               └── loki-configmap.yml
+└── README.md
 
 
-![Grafana Dashboard](dashboard-image/Screenshot.png)
+---
 
---- 
+## ⚙️ Prerequisites
 
-## 🧱 Components Overview
+Kubernetes cluster (Kind / Minikube / K3s)
 
-### 🔹 Prometheus
+kubectl
 
-Scrapes metrics from Alloy
-
-Stores metrics
-
-Loads alert rules via alerts.yml
-
-
-### 🔹 Grafana
-
-Uses provisioning via ConfigMaps
-
-Automatically loads:
-
-Datasources (Prometheus & Loki)
-
-Dashboards (JSON files)
-
-
-
-### 🔹 Loki
-
-Stores logs sent from Alloy
-
-
-### 🔹 Grafana Alloy
-
-Collects:
-
-Node metrics
-
-Process metrics
-
-Kubernetes container logs
-
-
-Forwards:
-
-Metrics → Prometheus
-
-Logs → Loki
-
+Helm v3+
 
 
 
 ---
 
-## ⚙️ Deployment Steps
+## 🛠️ Installation
 
-1️⃣ Create Namespace
+### 1️⃣ Clone repository
 ```bash
-kubectl apply -f k8s/namespace.yaml
+git clone https://github.com/<your-username>/monitoring-k8s.git
+cd monitoring-k8s
 ```
 
 ---
 
-2️⃣ Deploy Prometheus
+### 2️⃣ Install Helm chart
 ```bash
-kubectl apply -f k8s/prometheus/
+helm install monitoring ./helm/monitoring
 ```
-Includes:
-
-ConfigMap
-
-Deployment
-
-Service
-
-Alert rules
-
-
 
 ---
 
-3️⃣ Deploy Loki
+### 3️⃣ Verify pods
 ```bash
-kubectl apply -f k8s/loki/
+kubectl get pods -n monitoring
 ```
+Expected output:
 
----
-
-4️⃣ Deploy Grafana
-```bash
-kubectl apply -f k8s/grafana/
-```
-Grafana uses:
-
-grafana-datasources-provisioning ConfigMap
-
-grafana-dashboards-provisioning ConfigMap
-
-
-Dashboards and datasources are loaded automatically on startup.
+alloy        Running
+grafana      Running
+loki         Running
+prometheus   Running
 
 
 ---
 
-5️⃣ Deploy Alloy
-```bash 
-kubectl apply -f k8s/alloy/
-```
-Alloy configuration includes:
+## 🌐 Access Services
 
-Prometheus exporter
-
-Loki file log source
-
-Remote write targets
-
-
-
----
-
-## 📊 Grafana Access
-
-Port-forward Grafana:
+Grafana
 ```bash
 kubectl port-forward -n monitoring svc/grafana 3000:3000
 ```
-Open in browser:
-
-http://localhost:3000
-
-Default credentials:
-
+➡️ http://localhost:3000
 Username: admin
-
 Password: admin
 
 
-
 ---
 
-## 📈 Metrics Examples
-
-Available metrics in Grafana / Prometheus:
-
-> process_cpu_seconds_total
-
-> node_memory_MemAvailable_bytes
-
-> node_cpu_seconds_total
-
-> container_cpu_usage_seconds_total
-
-
-
-
----
-
-## 🚨 Alerts (Prometheus)
-
-Alert rules are defined in:
-
-k8s/prometheus/alerts.yml
-
-Loaded via:
+## Prometheus
 ```bash
-rule_files:
-  - /etc/prometheus/alerts/*.yml
+kubectl port-forward -n monitoring svc/prometheus 9090:9090
 ```
-
----
-
-## 🧠 Key Learnings
-
-Kubernetes monitoring without Helm
-
-Grafana provisioning using ConfigMaps
-
-Alloy configuration for metrics & logs
-
-Prometheus alerting
-
-Debugging CrashLoopBackOff & ConfigMap mounts
-
+➡️ http://localhost:9090
 
 
 ---
 
-## 🧪 Tested Environment
+## 📸 Screenshots
 
-Kubernetes (local cluster)
+Grafana Dashboards
 
-Grafana 10.x
+> 📍 Add your Grafana dashboard screenshot here
 
-Prometheus latest
 
-Loki latest
 
-Grafana Alloy
+![Grafana Dashboard](/dashboard-image/Screenshot.png)
+
+
+---
+
+
+## 🚨 Alerts
+
+Example alert rules:
+
+Instance down
+
+High CPU usage
+
+
+Alerts are managed via:
+
+templates/prometheus/configmap-alerts.yml
+
+Ready for extension with:
+
+Email
+
+Slack
+
+Alertmanager integration
 
 
 
 ---
 
-## 📌 Future Improvements
+## 📈 Metrics & Logs
 
-Alertmanager with Email notifications
+Metrics collected via Prometheus & Alloy
 
-Helm-based deployment
+Logs collected via Alloy → Loki
 
-Persistent volumes
+Visualization via Grafana
+
+
+
+---
+
+## 🧠 What This Project Demonstrates
+
+Helm chart design
+
+Kubernetes ConfigMaps & Deployments
+
+Monitoring best practices
+
+Production-ready observability stack
+
+Real-world DevOps skills
+
+
+
+---
+
+## 🔮 Future Improvements
+
+Alertmanager integration
+
+Email / Slack notifications
 
 TLS & authentication
 
-More dashboards
+Multi-environment Helm values
+
+CI/CD pipeline
+
+
+
+---
+
+## 👤 Author
+
+Aylar
+Computer Engineer | DevOps & Monitoring Enthusiast
 
 

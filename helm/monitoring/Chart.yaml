@@ -1,0 +1,6 @@
+apiVersion: v2
+name: monitoring
+description: Kubernetes Monitoring Stack (Grafana, Prometheus, Loki, Alloy)
+type: application
+version: 0.1.0
+appVersion: "1.0"

@@ -1,0 +1,10 @@
+namespace: monitoring
+
+grafana:
+  image: grafana/grafana:10.2.3
+
+prometheus:
+  image: prom/prometheus:v2.48.0
+
+alloy:
+  image: grafana/alloy:latest
