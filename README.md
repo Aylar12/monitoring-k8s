@@ -172,8 +172,6 @@ kubectl port-forward -n monitoring svc/prometheus 9090:9090
 
 Grafana Dashboards
 
-> 📍 Add your Grafana dashboard screenshot here
-
 
 
 ![Grafana Dashboard](/dashboard-image/Screenshot.png)
